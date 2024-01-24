@@ -46,7 +46,7 @@ import OurEvents from "../components/homePage/ourEvents";
 
 export default function Home(props) {
   const { data, theme, headerType } = props;
-  console.log('Home',props)
+
   
   const Router = useRouter();
   const animationclasses = useStyles();
@@ -759,36 +759,36 @@ export async function getStaticProps({ locale }) {
     process.env.NEXT_PUBLIC_MERCHANT,
     locale
   );
-  data = await res.json();
+  data = await res?.json();
   let theme = null;
  
-  //   const res2 = await getFetch(
-  //     GET_THEME,
-  //     process.env.NEXT_PUBLIC_MERCHANT,
-  //     locale
-  //   );
-  //   theme = await res2.json();
-  //  let thems2={pages: theme?.data?.navbarItems,
-  //   themeData: theme?.data?.theme,
-  //   devicesCategory: theme?.data?.devicesCategory,
-  //   socialMediaLinks: theme?.data?.contacts,
-  //   navbarType: theme?.data?.theme?.navbarType,
-  //   currencyOptions: theme?.data?.currencies,
-  //   // defaultCurrency: {
-  //   //   id: theme?.data?.defaultCurrency?.id,
-  //   //   name: theme?.data?.defaultCurrency?.name,
-  //   //   value: theme?.data?.defaultCurrency?.code,
-  //   // },
-  //   notifications: {
-  //     alerts: theme?.data?.alerts,
-  //     popup: theme?.data?.popup,
-  //   },
-  //   eventTypes: theme?.data?.eventTypes,
-  // }
+    const res2 = await getFetch(
+      GET_THEME,
+      process.env.NEXT_PUBLIC_MERCHANT,
+      locale
+    );
+    theme = await res2.json();
+   let thems2={pages: theme?.data?.navbarItems,
+    themeData: theme?.data?.theme,
+    // devicesCategory: theme?.data?.devicesCategory,
+    socialMediaLinks: theme?.data?.contacts,
+    navbarType: theme?.data?.theme?.navbarType,
+    // currencyOptions: theme?.data?.currencies,
+    // defaultCurrency: {
+    //   id: theme?.data?.defaultCurrency?.id,
+    //   name: theme?.data?.defaultCurrency?.name,
+    //   value: theme?.data?.defaultCurrency?.code,
+    // },
+    notifications: {
+      alerts: theme?.data?.alerts,
+      popup: theme?.data?.popup,
+    },
+    // eventTypes: theme?.data?.eventTypes,
+  }
  
   return {
     props: {
-    
+      theme:thems2,
       data: data || "",
     },
   };

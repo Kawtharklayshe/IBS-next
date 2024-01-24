@@ -1,7 +1,7 @@
-export const baseUri = process.env.NEXT_PUBLIC_BACK_END_PUBLIC_PATH;
-export const baseUris = process.env.NEXT_PUBLIC_BACK_END_PUBLIC_PATH_SECONDARY;
-export const GET_HOME_INFO = `${baseUri}/web/home`;
-export const GET_THEME = `${baseUris}/web/GlobalTheme`;
+export const baseUri = process.env.NEXT_PUBLIC_BACK_END_PUBLIC_PATH_SECONDARY;
+export const baseUris = process.env.NEXT_PUBLIC_BACK_END_PUBLIC_PATH;
+export const GET_HOME_INFO = `${baseUri}/web/home/new`;
+export const GET_THEME = `${baseUris}/web/GlobalTheme/new`;
 export const GET_GALLERY = `${baseUri}/web/gallery?limit=30`;
 export const GET_NEWS = (pageCount, pageSize) =>
   `${baseUri}/web/news?PageNumber=${pageCount}&PageSize=${pageSize}`;

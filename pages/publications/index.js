@@ -14,7 +14,7 @@ import CustomLoader from "../../components/customLoader";
 import style from "../../styles/publications/style.module.css";
 
 export default function Publications(props) {
-  console.log('props',props)
+ 
   const { data, theme, headerType } = props;
   const Router = useRouter();
   const [currentPage, setCurrentPage] = useState(parseInt(Router.query.p) || 1);

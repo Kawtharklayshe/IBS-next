@@ -12,7 +12,7 @@ import CustomLoader from "../../components/customLoader";
 import MainEventCards from "../../components/event/mainEventCards";
 
 export default function EventTypes(props) {
-  console.log("here",props)
+
   const { data, theme, headerType } = props;
   const Router = useRouter();
   const [currentPage, setCurrentPage] = useState(parseInt(Router.query.p) || 1);

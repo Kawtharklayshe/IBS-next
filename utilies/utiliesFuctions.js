@@ -34,6 +34,7 @@ export function getSEOKeywordsContent(list = []) {
 /// function for handling pages list and return
 //  list of uniqe object [name, title, subTitle, link, children]
 export function reshapeNavList(list = []) {
+ 
   const temp = list.map((page) => {
     const { link, slugName, type, subPages, ...rest } = page;
     if (type == MENU_ITEM_TYPES.static) {

@@ -5,9 +5,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import useTheme from "../components/useTheme/useTheme";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import CustomLoader from "../components/customLoader";
-import { GET_THEME } from "../services/endpoints";
-import useFetch from "../components/useFetch/useFetch";
+// import CustomLoader from "../components/customLoader";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
@@ -34,28 +32,22 @@ async function fetchTheme(setAllData, language) {
   setAllData({
     pages: theme?.data?.navbarItems,
     themeData: theme?.data?.theme,
-    devicesCategory: theme?.data?.devicesCategory,
-    childrenCategories: theme?.data?.devicesCategory?.childrenCategories,
+   
     socialMediaLinks: theme?.data?.contacts,
     navbarType: theme?.data?.theme?.navbarType,
-    currencyOptions: theme?.data?.currencies,
-    defaultCurrency: {
-      id: theme?.data?.defaultCurrency?.id,
-      name: theme?.data?.defaultCurrency?.name,
-      value: theme?.data?.defaultCurrency?.code,
-    },
+  
     notifications: {
       alerts: theme?.data?.alerts,
       popup: theme?.data?.popup,
     },
-    eventTypes: theme?.data?.eventTypes,
+  
   });
 }
 
 function MyApp({ Component, pageProps }) {
   // console.log(data)
-  // console.log(Component)
-  console.log(pageProps)
+  const Homedata=pageProps.data.data
+
   const Router = useRouter();
   const [loadingData, setLoadingData] = useState(true);
   const [allData, setAllData] = useState({
@@ -92,12 +84,12 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(async () => {
     setLoadingData(true);
-    await fetchTheme(setAllData, Router.locale);
+    // await fetchTheme(setAllData, Router.locale);
     setAllData(pageProps.theme)
     checkLoadImages(setLoadingData);
   }, [Router.locale]);
 
-  if (loadingData || !allData.themeData) return <HomePageSkelton />;
+  if (loadingData || !allData?.themeData) return <HomePageSkelton />;
   // return (
   //   <div
   //     style={{
@@ -147,12 +139,12 @@ function MyApp({ Component, pageProps }) {
           headerApi={pageProps.data}
             pages={allData.pages}
             theme={allData.themeData}
-            devicesCategory={allData.devicesCategory}
+            devicesCategory={Homedata.devicesCategory}
             headerType={allData.navbarType}
             socialMediaLinks={allData.socialMediaLinks}
-            currencyOptions={allData.currencyOptions}
+            currencyOptions={Homedata.currencyOptions}
             notifications={allData.notifications}
-            eventTypes={allData.eventTypes}
+            eventTypes={Homedata.eventTypes}
           />
           <Component
             {...pageProps}

@@ -93,7 +93,7 @@ export default function WorkshopItem({ data, tweets, headerType, theme }) {
   //   images: data?.data?.item?.mediaItems,
   // };
 
-  console.log("event", data);
+
 
   SwiperCore.use([Navigation, Pagination, Autoplay]);
   const goNext = (swiperRef) => {

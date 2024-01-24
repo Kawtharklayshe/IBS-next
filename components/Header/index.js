@@ -53,7 +53,8 @@ const flagsEnum = {
 const Header = (props) => {
   const Router = useRouter();
   
-// const {headerApi}=props
+const {headerApi}=props
+console.log("header",props)
   const [getFetch, postFetch] = useFetch();
   let { t } = useTranslation("common");
   const {
@@ -73,7 +74,7 @@ const Header = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [scrollTop, setScrollTop] = useState(false); //to apply effect on navbar
   const [isFirstRender, setIsFirstRender] = useState(true); //to apply effect on navbar
-  const [headerApi, setHeaderApi] = useState();
+  // const [headerApi, setHeaderApi] = useState();
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
   const newNavBarItems = appendChildrenToEventMewuItem(
@@ -96,15 +97,15 @@ const Header = (props) => {
   };
 
   useEffect(async () => {
-    let res = await getFetch(
-      GET_HOME_INFO,
-      process.env.NEXT_PUBLIC_MERCHANT,
-      Router.locale
-    );
-    let data = await res?.json();
+  //   let res = await getFetch(
+  //     GET_HOME_INFO,
+  //     process.env.NEXT_PUBLIC_MERCHANT,
+  //     Router.locale
+  //   );
+  //   let data = await res?.json();
     
-  console.log("header data",data)
-    setHeaderApi(data);
+  // console.log("header data",data)
+  //   setHeaderApi(data);
   }, []);
 
   // to calculate the animation delay for the elements after the nav items
