@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import AOS from "aos";
 import React, { Fragment, useEffect, useState } from "react";
 import useTheme from "../components/useTheme/useTheme";
-import Header from "../components/header";
+import Header from "../components/Header";
 import Footer from "../components/footer";
 // import CustomLoader from "../components/customLoader";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
