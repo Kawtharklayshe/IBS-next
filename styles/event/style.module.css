@@ -1,0 +1,41 @@
+.descriptionEvent{
+    margin-left: 25px;
+    margin-top: 25px;
+    line-height: 1.8;
+    color: gray;
+}
+.titleEvent{
+    margin-left: 25px;
+}
+.imageEventMain{
+    object-fit: cover;
+}
+@media(max-width: 767px){
+    .descriptionEvent{
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .btnEventMain{
+        position: relative;
+        /* top: unset; */
+        bottom: 0;
+        display: block;
+        margin: auto;
+        margin-top: 25px;
+        /* right: 20%; */
+        /* margin: auto; */
+    }
+    .mainBoxEvent{
+        display: flex;
+        flex-direction: column;
+    }
+    .imageEventMain{
+        width: 100%;
+    }
+    .titleEvent{
+        text-align: center;
+    }
+}

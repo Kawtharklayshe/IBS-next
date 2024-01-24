@@ -1,0 +1,32 @@
+.newsPageCard {
+  /* box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 20px; */
+  /* height: 394px; */
+  /* background: #ffffff; */
+  /* padding: 15px 0px; */
+
+  /*JA*/
+  height: 474px;
+  border-radius: inherit;
+  /* box-shadow: 0px 0px 0.8px; */
+}
+.newsPageCard:hover {
+  /* box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.3); */
+  /* cursor: pointer; */
+}
+
+@media (min-width: 610px) and (max-width: 900px) {
+  .nowrapEffect {
+    flex-wrap: nowrap;
+  }
+}
+
+.textAn {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  z-index: 999 !important;
+}
