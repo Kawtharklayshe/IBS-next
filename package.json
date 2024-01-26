@@ -1,6 +1,7 @@
 {
   "name": "meta_project",
   "private": true,
+  "homepage": ".",
   "scripts": {
     "dev": "next -p 3000",
     "build": "next build",
