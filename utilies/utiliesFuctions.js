@@ -1,5 +1,11 @@
 import { MENU_ITEM_TYPES } from "../constants/enums";
 /// function for checking of document status if all the images within it are loaded
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
 // if true swap custom loader status to false(hidden)
 export function checkLoadImages(setLoading) {
   if (typeof window == "object") {
@@ -31,6 +37,10 @@ export function getSEOKeywordsContent(list = []) {
 /// function for handling pages list and return
 //  list of uniqe object [name, title, subTitle, link, children]
 export function reshapeNavList(list = []) {
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   const temp = list.map((page) => {
     const { link, slugName, type, subPages, ...rest } = page;
     if (type == MENU_ITEM_TYPES.static) {

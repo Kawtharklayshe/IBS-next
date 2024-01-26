@@ -5,7 +5,11 @@ import React, { Fragment, useEffect, useState } from "react";
 import useTheme from "../components/useTheme/useTheme";
 import Header from "../components/Header";
 import Footer from "../components/footer";
+<<<<<<< HEAD
 import CustomLoader from "../components/customLoader";
+=======
+// import CustomLoader from "../components/customLoader";
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
@@ -32,6 +36,7 @@ async function fetchTheme(setAllData, language) {
   setAllData({
     pages: theme?.data?.navbarItems,
     themeData: theme?.data?.theme,
+<<<<<<< HEAD
     devicesCategory: theme?.data?.devicesCategory,
     childrenCategories: theme?.data?.devicesCategory?.childrenCategories,
     socialMediaLinks: theme?.data?.contacts,
@@ -42,15 +47,31 @@ async function fetchTheme(setAllData, language) {
       name: theme?.data?.defaultCurrency?.name,
       value: theme?.data?.defaultCurrency?.code,
     },
+=======
+   
+    socialMediaLinks: theme?.data?.contacts,
+    navbarType: theme?.data?.theme?.navbarType,
+  
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
     notifications: {
       alerts: theme?.data?.alerts,
       popup: theme?.data?.popup,
     },
+<<<<<<< HEAD
     eventTypes: theme?.data?.eventTypes,
+=======
+  
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   });
 }
 
 function MyApp({ Component, pageProps }) {
+<<<<<<< HEAD
+=======
+  // console.log(data)
+  const Homedata=pageProps.data.data
+
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   const Router = useRouter();
   const [loadingData, setLoadingData] = useState(true);
   const [allData, setAllData] = useState({
@@ -87,12 +108,21 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(async () => {
     setLoadingData(true);
+<<<<<<< HEAD
      // await fetchTheme(setAllData, Router.locale);
      setAllData(pageProps.theme)
     checkLoadImages(setLoadingData);
   }, [Router.locale]);
 
   if (loadingData || !allData.themeData) return <HomePageSkelton />;
+=======
+    // await fetchTheme(setAllData, Router.locale);
+    setAllData(pageProps.theme)
+    checkLoadImages(setLoadingData);
+  }, [Router.locale]);
+
+  if (loadingData || !allData?.themeData) return <HomePageSkelton />;
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   // return (
   //   <div
   //     style={{
@@ -139,6 +169,7 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <ThemeProvider theme={theme}>
           <Header
+<<<<<<< HEAD
            headerApi={pageProps.data}
             pages={allData.pages}
             theme={allData.themeData}
@@ -148,6 +179,17 @@ function MyApp({ Component, pageProps }) {
             currencyOptions={allData.currencyOptions}
             notifications={allData.notifications}
             eventTypes={allData.eventTypes}
+=======
+          headerApi={pageProps.data}
+            pages={allData.pages}
+            theme={allData.themeData}
+            devicesCategory={Homedata.devicesCategory}
+            headerType={allData.navbarType}
+            socialMediaLinks={allData.socialMediaLinks}
+            currencyOptions={Homedata.currencyOptions}
+            notifications={allData.notifications}
+            eventTypes={Homedata.eventTypes}
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
           />
           <Component
             {...pageProps}

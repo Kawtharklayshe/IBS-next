@@ -3,6 +3,10 @@ import MainCoverSection from "../../components/mainCover";
 import PublicationCard from "../../components/publications/publicationCard";
 import { useState, useEffect } from "react";
 import { checkLoadImages } from "../../utilies/utiliesFuctions";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
 import { GETPUBLICATIONSLIST } from "../../services/endpoints";
 import useFetch from "../../components/useFetch/useFetch";
 import useTranslation from "next-translate/useTranslation";
@@ -13,6 +17,10 @@ import CustomLoader from "../../components/customLoader";
 import style from "../../styles/publications/style.module.css";
 
 export default function Publications(props) {
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   const { data, theme, headerType } = props;
   const Router = useRouter();
   const [currentPage, setCurrentPage] = useState(parseInt(Router.query.p) || 1);

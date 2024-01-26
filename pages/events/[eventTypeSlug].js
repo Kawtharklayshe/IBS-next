@@ -107,6 +107,10 @@ export default function WorkShop(props) {
   );
 }
 export const getServerSideProps = async (context) => {
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   const [getFetch] = useFetch();
   const slug = context?.params?.eventTypeSlug;
 

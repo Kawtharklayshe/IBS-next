@@ -13,8 +13,13 @@ import BackgroundStyle from "../components/homePage/backgroundSty";
 import ProjectCard from "../components/homePage/projectCard";
 import GalleryCard from "../components/homePage/gallerycard";
 import VideoBackground from "../components/homePage/videoBackground";
+<<<<<<< HEAD
 import useFetch from "../components/useFetch/useFetch";
 import { GET_THEME } from "../services/endpoints";
+=======
+import { GET_THEME } from "../services/endpoints";
+import useFetch from "../components/useFetch/useFetch";
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Approach from "../components/homePage/approach";
@@ -46,6 +51,11 @@ import OurEvents from "../components/homePage/ourEvents";
 
 export default function Home(props) {
   const { data, theme, headerType } = props;
+<<<<<<< HEAD
+=======
+
+  
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   const Router = useRouter();
   const animationclasses = useStyles();
   const [heroHeight, setHeroHeight] = useState(0);
@@ -790,4 +800,8 @@ export async function getStaticProps({ locale }) {
       data: data || "",
     },
   };
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a

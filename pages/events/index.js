@@ -12,6 +12,10 @@ import CustomLoader from "../../components/customLoader";
 import MainEventCards from "../../components/event/mainEventCards";
 
 export default function EventTypes(props) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   const { data, theme, headerType } = props;
   const Router = useRouter();
   const [currentPage, setCurrentPage] = useState(parseInt(Router.query.p) || 1);
@@ -97,6 +101,10 @@ export default function EventTypes(props) {
   );
 }
 export async function getServerSideProps(context) {
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 4fd65d1efc0a36aa954c423f42d3af1b9df8347a
   let page = context?.query?.p || 1;
   let locale = context?.locale;
   const [getFetch] = useFetch();
