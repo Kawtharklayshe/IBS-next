@@ -11,12 +11,10 @@ import {
   Radio,
   FormControlLabel,
   FormHelperText,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Mail, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
-import useStyles from "../../styles/formValidation/dropDown";
+import useStyles from "./style";
 
 /** Email Input Filed */
 export const EmailInputField = ({
@@ -305,6 +303,7 @@ export const DatePickerInputField = ({
     <Typography variant="subtitle2" color="onBackground.dark">
       {label} {isRequired && <span style={{ color: "red" }}>*</span>}
     </Typography>
+
     <TextField
       className={classNames ?? undefined}
       fullWidth={fullWidth}
@@ -367,7 +366,8 @@ export const RadioButtonsGroupField = ({
   );
 };
 
-// Dropdown (select) with Input Field
+// Dropdown (select) Input Field
+
 export const DropDownWithInput = ({
   isRequired,
   formikRef,
@@ -408,51 +408,6 @@ export const DropDownWithInput = ({
           />
         )}
       />
-    </Box>
-  );
-};
-
-// DropDown (Select) field
-export const DropDownMenuField = ({
-  formikRef,
-  name,
-  label,
-  value,
-  options,
-  fullWidth,
-  handleChange,
-  classNames,
-  isRequired,
-  size,
-}) => {
-  return (
-    <Box sx={{ mt: 1 }}>
-      <FormControl
-        className={classNames ?? undefined}
-        error={formikRef.touched[name] && Boolean(formikRef.errors[name])}
-        fullWidth={fullWidth}
-      >
-        <FormLabel
-          id={`drop-down-menu-${name}`}
-          sx={{ color: "onBackground.dark" }}
-        >
-          {label} {isRequired && <span style={{ color: "red" }}>*</span>}
-        </FormLabel>
-        <Select
-          labelId={`drop-down-menu-${name}`}
-          value={value}
-          name={name}
-          size={size}
-          onChange={(e) => handleChange(name, e.target.value)}
-        >
-          {options.map((op) => (
-            <MenuItem value={op.value}>{op.label}</MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>
-          {formikRef.touched[name] && formikRef.errors[name]}
-        </FormHelperText>
-      </FormControl>
     </Box>
   );
 };

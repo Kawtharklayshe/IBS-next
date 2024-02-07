@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://foliov4testweb.meta-itech.com
+
+# Sitemaps
+Sitemap: https://foliov4testweb.meta-itech.com/sitemap.xml

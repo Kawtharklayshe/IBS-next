@@ -21,6 +21,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:ital,wght@0,400;0,500;0,700;1,300&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
@@ -34,6 +38,7 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
+  // ******************************************************
   // Resolution order
   //
   // On the server:
@@ -71,8 +76,8 @@ MyDocument.getInitialProps = async (ctx) => {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
-      sheets.getStyleElement(),
       ...React.Children.toArray(initialProps.styles),
+      sheets.getStyleElement(),
     ],
   };
 };

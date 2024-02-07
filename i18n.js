@@ -1,11 +1,10 @@
 const hoistNonReactStatics = require("hoist-non-react-statics");
 module.exports = {
-  locales: ["en", "de"],
+  locales: ["en", "de", "ar"],
   defaultLocale: "en",
-  localeDetection: false,
+  // localeDetection: false,
   pages: {
     "*": ["common"],
-    "/projects": ["projects"],
   },
   staticsHoc: hoistNonReactStatics,
 };

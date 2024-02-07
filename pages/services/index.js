@@ -2,28 +2,34 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import useFetch from "../../components/useFetch/useFetch";
+import { getFetch } from "../../services/httpService";
 import { GET_SERVICES } from "../../services/endpoints";
-import { checkLoadImages } from "../../utilies/utiliesFuctions";
+import {
+  checkLoadImages,
+  getSEOKeywordsContent,
+} from "../../utilies/utiliesFuctions";
 import { Grid, Container, Box } from "@mui/material";
-import MainCoverSection from "../../components/mainCover";
-import Services from "../../components/homePage/servicesN";
-import CustomLoader from "../../components/customLoader";
-import AutoPagination from "../../components/customPagination";
-export default function ServicesP(props) {
+import MainCover from "../../components/Shared/pageCover/mainCover/Type2";
+import ServiceCard from "../../components/pages/Services/Cards/Type1";
+import CustomLoader from "../../components/Shared/customLoader";
+import AutoPagination from "../../components/Shared/customPagination";
+import useStyles from "../../components/pages/Services/style";
+
+export default function Services(props) {
   const { data, headerType } = props;
+  let { t } = useTranslation("common");
   const Router = useRouter();
+  const classes = useStyles();
   const [currentPage, setCurrentPage] = useState(parseInt(Router.query.p) || 1);
   const [loading, setLoading] = useState(true);
   const [pageCount, setPageCount] = useState(data?.data?.pageItems?.totalPages);
-  let { t } = useTranslation("common");
   const [pageInfo, setPageInfo] = useState({
     title: data?.data?.pageDetail?.title,
     description: data?.data?.pageDetail?.description,
     image: data?.data?.pageDetail?.image,
     breadcrumbs: [
       {
-        title: "home",
+        title: t("home"),
         link: "/",
       },
       {
@@ -42,66 +48,48 @@ export default function ServicesP(props) {
   }, []);
   return (
     <div>
-      <div
-        style={{
-          width: "100%",
-          height: "100vh",
-          background: "#fcfcfc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: "1000",
-        }}
-        className={!loading ? "none" : undefined}
-      >
+      <div className={!loading ? "none" : undefined}>
         <CustomLoader />
       </div>
       <div className={loading ? "hidden" : undefined}>
-        <MainCoverSection
+        <MainCover
           breadcrumbs={pageInfo.breadcrumbs}
           title={pageInfo.title}
           description={pageInfo.description}
           image={pageInfo.image}
           headerType={headerType}
         />
-        <Box sx={{ backgroundColor: "background.main" }}>
-          <Container maxWidth="lg" sx={{ paddingBottom: "75px" }}>
+        <Box className={classes.root}>
+          <Container maxWidth="false" className={classes.innerContainer}>
             <Head>
               <title>{pageInfo.title}</title>
+              <meta
+                name="keywords"
+                content={getSEOKeywordsContent(data?.data?.pageDetail?.seoTags)}
+              />
+              <meta
+                name="description"
+                content={data?.data?.pageDetail?.seoDescription}
+              />
             </Head>
-            <Grid
-              container
-              rowSpacing={5}
-              columnSpacing={3}
-              sx={{
-                justifyContent: "flex-start",
-              }}
-            >
+            <Grid container rowSpacing={5} columnSpacing={3}>
               {data?.data?.pageItems?.map((item) => {
                 return (
                   <Grid item xs={12} sm={6} md={4} key={item.id}>
-                    <Services item={item} parentPageTitle={pageInfo.title} />
+                    <ServiceCard item={item} parentPageTitle={pageInfo.title} />
                   </Grid>
                 );
               })}
             </Grid>
-            {/* <Grid container mt={3}>
-              <Grid
-                item
-                xs={12}
-                md={12}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
+            <Grid container mt={3}>
+              <Grid item xs={12} className={classes.paginationContainer}>
                 <AutoPagination
                   currentPage={currentPage}
                   pageCount={pageCount}
                   onChangeCurrentPage={handleChangeCurrentPage}
                 />
               </Grid>
-            </Grid> */}
+            </Grid>
           </Container>
         </Box>
       </div>
@@ -111,7 +99,6 @@ export default function ServicesP(props) {
 export async function getStaticProps(context) {
   let page = context?.query?.p || 1;
   let locale = context?.locale;
-  const [getFetch] = useFetch();
   const res = await getFetch(
     GET_SERVICES(page, 6),
     process.env.NEXT_PUBLIC_MERCHANT,

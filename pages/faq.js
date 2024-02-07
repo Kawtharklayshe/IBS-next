@@ -1,14 +1,21 @@
 import Head from "next/head";
-import FAQItem from "../components/FAQ/faqItem";
+import useTranslation from "next-translate/useTranslation";
+import FAQItem from "../components/pages/FAQ/FAQItem";
 import { Grid, Container, Box } from "@mui/material";
 import { useState, useEffect } from "react";
-import { checkLoadImages } from "../utilies/utiliesFuctions";
-import MainCoverSection from "../components/mainCover";
-import useFetch from "../components/useFetch/useFetch";
-import CustomLoader from "../components/customLoader";
+import {
+  checkLoadImages,
+  getSEOKeywordsContent,
+} from "../utilies/utiliesFuctions";
+import MainCover from "../components/Shared/pageCover/mainCover/Type2";
+import { getFetch } from "../services/httpService";
+import CustomLoader from "../components/Shared/customLoader";
 import { GETFAQ } from "../services/endpoints";
+import useStyles from "../components/pages/FAQ/style";
 
-function FAQ({ data, headerType }) {
+function FAQ({ data, headerType, theme }) {
+  let { t } = useTranslation("common");
+  const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [pageInfo, setPageInfo] = useState({
     title: data?.data?.pageDetail?.title,
@@ -16,7 +23,7 @@ function FAQ({ data, headerType }) {
     image: data?.data?.pageDetail?.image,
     breadcrumbs: [
       {
-        title: "home",
+        title: t("home"),
         link: "/",
       },
       {
@@ -31,86 +38,36 @@ function FAQ({ data, headerType }) {
   }, []);
   return (
     <div>
-      <div
-        style={{
-          width: "100%",
-          height: "100vh",
-          background: "#fcfcfc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: "1000",
-        }}
-        className={!loading ? "none" : undefined}
-      >
+      <div className={!loading ? "none" : undefined}>
         <CustomLoader />
       </div>
       <div className={loading ? "hidden" : undefined}>
-        <MainCoverSection
+        <MainCover
           breadcrumbs={pageInfo.breadcrumbs}
           title={pageInfo.title}
           description={pageInfo.description}
           image={pageInfo.image}
           headerType={headerType}
         />
-        <Head>
-          <title>{pageInfo.title}</title>
-        </Head>
-        <Box sx={{ backgroundColor: "background.main" }}>
-          <Container
-            maxWidth="lg"
-            sx={{
-              paddingBottom: "100px",
-              display: { xs: "none", md: "block" },
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-              }}
-            >
-              <Grid container spacing={4} sx={{ my: "50px", width: "50%" }}>
-                {data?.data?.pageItems?.map((item, index, elements) => {
-                  if (index < parseInt(elements.length / 2))
-                    return (
-                      <Grid item xs={12} md={12} key={index}>
-                        <FAQItem data={item} />
-                      </Grid>
-                    );
-                })}
-              </Grid>
-              <Grid container spacing={4} sx={{ my: "50px", width: "50%" }}>
-                {data?.data?.pageItems?.map((item, index, elements) => {
-                  if (index >= parseInt(elements.length / 2))
-                    return (
-                      <Grid item xs={12} md={12} key={index}>
-                        <FAQItem data={item} />
-                      </Grid>
-                    );
-                })}
-              </Grid>
-            </div>
-          </Container>
-          <Container
-            maxWidth="lg"
-            sx={{
-              paddingBottom: "100px",
-              display: { xs: "block", md: "none" },
-            }}
-          >
-            <Grid container spacing={4} sx={{ my: "50px" }}>
-              {data?.data?.pageItems?.map((item, index, elements) => {
-                return (
-                  <Grid item xs={12} key={index}>
-                    <FAQItem data={item} />
-                  </Grid>
-                );
-              })}
+        <Box className={classes.root}>
+          <Head>
+            <title>{pageInfo.title}</title>
+            <meta
+              name="keywords"
+              content={getSEOKeywordsContent(data?.data?.pageDetail?.seoTags)}
+            />
+            <meta
+              name="description"
+              content={data?.data?.pageDetail?.seoDescription}
+            />
+          </Head>
+          <Container maxWidth="false" className={classes.innerContainer}>
+            <Grid container spacing={4}>
+              {data?.data?.pageItems?.map((item, index) => (
+                <Grid item xs={12} md={6} key={index}>
+                  <FAQItem data={item} />
+                </Grid>
+              ))}
             </Grid>
           </Container>
         </Box>
@@ -121,7 +78,6 @@ function FAQ({ data, headerType }) {
 export default FAQ;
 
 export async function getStaticProps({ locale }) {
-  const [getFetch] = useFetch();
   const res = await getFetch(GETFAQ, process.env.NEXT_PUBLIC_MERCHANT, locale);
   const data = await res?.json();
   return {

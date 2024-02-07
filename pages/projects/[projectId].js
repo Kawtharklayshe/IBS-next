@@ -1,32 +1,26 @@
+import Head from "next/head";
 import { useState, useEffect } from "react";
-import { Container, Grid, Box, Typography } from "@mui/material";
+import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
+import { getFetch } from "../../services/httpService";
+import { PROJECT_DETAIL } from "../../services/endpoints";
+import { PAGE_RATE_TYPES } from "../../constants/enums";
 import {
   getSEOKeywordsContent,
   checkLoadImages,
 } from "../../utilies/utiliesFuctions";
-import Carousel from "react-material-ui-carousel";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CircleIcon from "@mui/icons-material/Circle";
-import { ArrowRightAlt } from "@mui/icons-material";
-import MainCover from "../../components/mainCover";
-import classes from "../../styles/projectDetails/style.module.css";
-import { PROJECT_DETAIL, GET_PROJECTS } from "../../services/endpoints";
-import useFetch from "../../components/useFetch/useFetch";
-import Image from "next/image";
-import VidoeComp from "../../components/videoComp/videoComp";
-import CustomLoader from "../../components/customLoader";
-import Head from "next/head";
-import FullImage from "../../components/helpers/fullImage";
-import useTranslation from "next-translate/useTranslation";
+import { Container, Grid, Box, Typography } from "@mui/material";
+import MainCover from "../../components/Shared/pageCover/mainCover/Type2";
+import CustomLoader from "../../components/Shared/customLoader";
+import CarouselWithGallery from "../../components/UI/Carousel/CarouselWithGallery";
+import ShareLinks from "../../components/Shared/ShareLinks";
+import useStyles from "../../components/pages/ProjectDetails/style";
 
-const ProjectDetails = ({ data, headerType }) => {
-  const router = useRouter();
+const ProjectDetails = ({ data, headerType, theme }) => {
+  const Router = useRouter();
   let { t } = useTranslation("common");
+  const classes = useStyles();
   const [loading, setLoading] = useState(true);
-  const [urlImage, setImageUrl] = useState();
-  const [open, setOpen] = useState(false);
   const [pageInfo, setPageInfo] = useState({
     title: data?.data?.pageDetail?.title,
     description: data?.data?.pageDetail?.description,
@@ -37,7 +31,7 @@ const ProjectDetails = ({ data, headerType }) => {
         link: "/",
       },
       {
-        title: router.query.blog || t("projects"),
+        title: Router.query.blog || t("projects"),
         link: "/projects",
       },
       {
@@ -62,33 +56,17 @@ const ProjectDetails = ({ data, headerType }) => {
   return (
     <div>
       <Head>
-        <title>{data?.data?.item?.title}</title>
+        <title>{pageInfo.title}</title>
+        <meta
+          name="keywords"
+          content={getSEOKeywordsContent(data?.data?.pageDetail?.seoTags)}
+        />
         <meta
           name="description"
-          content={data?.data?.item?.seoDescription}
-        ></meta>
-        {data?.data?.seo?.seoTags.length > 0 ? (
-          <meta
-            name="keywords"
-            content={getSEOKeywordsContent(data.data.seo.seoTags)}
-          />
-        ) : null}
+          content={data?.data?.pageDetail?.seoDescription}
+        />
       </Head>
-      <div
-        style={{
-          width: "100%",
-          height: "100vh",
-          background: "#fcfcfc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: "1000",
-        }}
-        className={!loading ? "none" : undefined}
-      >
+      <div className={!loading ? "none" : undefined}>
         <CustomLoader />
       </div>
       <div className={loading ? "hidden" : undefined}>
@@ -99,99 +77,48 @@ const ProjectDetails = ({ data, headerType }) => {
           image={pageInfo.image}
           headerType={headerType}
         />
-        <Box sx={{ backgroundColor: "background.main" }}>
-          <Container maxWidth="lg" sx={{ paddingBottom: "75px", mt: "-40px" }}>
-            <Grid container pt={5} mt={5}>
-              <Grid item xs={12} md={6}>
+        <Box className={classes.root}>
+          <Container maxWidth="false" className={classes.innerContainer}>
+            <Grid container id="projectDetailsSection">
+              <Grid item xs={12}>
+                <Box>
+                  <Typography variant="h6" className={classes.shareTitle}>
+                    {t("Share")}
+                  </Typography>
+                  <ShareLinks
+                    sharedLink={`${
+                      typeof window === "object"
+                        ? `${window.location.origin}${Router.asPath}`
+                        : ""
+                    }`}
+                    printedTargetSectionId="projectDetailsSection"
+                    theme={theme}
+                    pageType={PAGE_RATE_TYPES.projects}
+                    referenceId={projectDetails.id}
+                  />
+                </Box>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                md={
+                  projectDetails?.images && projectDetails?.images?.length > 0
+                    ? 6
+                    : 12
+                }
+              >
                 <div
                   dangerouslySetInnerHTML={{
                     __html: data?.data?.item?.description,
                   }}
-                  style={{ padding: "6px 12px" }}
+                  className={classes.description}
                 ></div>
               </Grid>
-              <Grid item xs={12} md={6} sx={{ color: "primary.main" }}>
-                <Box sx={{ color: "primary.main" }}>
-                  <Carousel
-                    IndicatorIcon={<CircleIcon fontSize="10px" />}
-                    indicatorIconButtonProps={{
-                      style: {
-                        margin: "4px 4px", // 4 px for top,down  and 5 for right,left
-                        color: "#c4c4c4",
-                        fontSize: "10px",
-                      },
-                    }}
-                    activeIndicatorIconButtonProps={{
-                      style: {
-                        color: "inherit", // it takes its color from Box parent
-                      },
-                    }}
-                    indicatorContainerProps={{
-                      style: {
-                        marginTop: "0px", // 5
-                        textAlign: "center", // 4
-                      },
-                    }}
-                    navButtonsProps={{
-                      // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
-                      style: {
-                        backgroundColor: "transparent",
-                        borderRadius: 0,
-                        color: "inherit",
-                        top: "50% !important",
-                        transform: "translateY(-50%)",
-                      },
-                    }}
-                    navButtonsWrapperProps={{
-                      // Move the buttons to the bottom. Unsetting top here to override default style.
-                      style: {
-                        bottom: "0",
-                        top: "unset",
-                      },
-                    }}
-                    NextIcon={
-                      <ArrowForwardIosIcon
-                        style={{ fontSize: "40px", color: "inherit" }}
-                      />
-                    }
-                    PrevIcon={
-                      <ArrowBackIosIcon
-                        style={{ fontSize: "40px", color: "inherit" }}
-                      />
-                    }
-                  >
-                    {data?.data?.item?.mediaItems?.map((item, i) => (
-                      <div key={i}>
-                        {item?.type == 1 && (
-                          <img
-                            key={i}
-                            src={item?.thumbnailUrl}
-                            className={classes.carsoulDetails}
-                            onClick={() => {
-                              setOpen(true);
-                              setImageUrl(item.url);
-                            }}
-                          />
-                        )}
-                        {item?.type == 2 && (
-                          <VidoeComp
-                            video={item?.thumbnailUrl}
-                            image={item?.coverImage}
-                          />
-                        )}
-                        {open == true && (
-                          <FullImage
-                            open={open}
-                            setOpen={setOpen}
-                            image={urlImage}
-                            images={data?.data?.item?.mediaItems}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </Carousel>
-                </Box>
-              </Grid>
+              {projectDetails?.images && projectDetails?.images?.length > 0 && (
+                <Grid item xs={12} md={6}>
+                  <CarouselWithGallery items={projectDetails.images} />
+                </Grid>
+              )}
             </Grid>
           </Container>
         </Box>
@@ -202,7 +129,6 @@ const ProjectDetails = ({ data, headerType }) => {
 
 export default ProjectDetails;
 export async function getServerSideProps(context) {
-  const [getFetch] = useFetch();
   const id = context.params.projectId;
   let locale = context?.locale;
   const res = await getFetch(

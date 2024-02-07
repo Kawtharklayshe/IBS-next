@@ -1,24 +1,29 @@
-import TeamCard from "../components/Team/teamCard";
-import { Grid, Container, Box } from "@mui/material";
-import MainCoverSection from "../components/mainCover";
-import { useState, useEffect } from "react";
-import { checkLoadImages } from "../utilies/utiliesFuctions";
-import useFetch from "../components/useFetch/useFetch";
-import useTranslation from "next-translate/useTranslation";
 import Head from "next/head";
+import { useState, useEffect } from "react";
+import useTranslation from "next-translate/useTranslation";
+import {
+  checkLoadImages,
+  getSEOKeywordsContent,
+} from "../utilies/utiliesFuctions";
+import { getFetch } from "../services/httpService";
 import { GET_TEAM } from "../services/endpoints";
-import CustomLoader from "../components/customLoader";
+import { Grid, Container, Box } from "@mui/material";
+import CustomLoader from "../components/Shared/customLoader";
+import MainCover from "../components/Shared/pageCover/mainCover/Type2";
+import TeamCard from "../components/pages/Team/Cards/Type1";
+import useStyles from "../components/pages/Team/style";
 
-export default function Team({ data, theme, headerType }) {
+const Team = ({ data, theme, headerType }) => {
   let { t } = useTranslation("common");
   const [loading, setLoading] = useState(true);
+  const classes = useStyles();
   const [pageInfo, setPageInfo] = useState({
-    title: data?.data?.pageDetail?.title,
+    title: data?.data?.pageDetail?.title || "",
     image: data?.data?.pageDetail?.image,
     description: "",
     breadcrumbs: [
       {
-        title: "home",
+        title: t("home"),
         link: "/",
       },
       {
@@ -33,60 +38,45 @@ export default function Team({ data, theme, headerType }) {
   }, []);
   return (
     <div>
-      <div
-        style={{
-          width: "100%",
-          height: "100vh",
-          background: "#fcfcfc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: "1000",
-        }}
-        className={!loading ? "none" : undefined}
-      >
+      <div className={!loading ? "none" : undefined}>
         <CustomLoader />
       </div>
-      <div className={loading ? "hidden" : undefined}>
-        <MainCoverSection
-          breadcrumbs={pageInfo.breadcrumbs}
-          title={pageInfo.title}
-          description={pageInfo.description}
-          image={pageInfo.image}
-          headerType={headerType}
-        />
-        <Box sx={{ backgroundColor: "background.main" }}>
-          <Container maxWidth="lg" sx={{ paddingBottom: "100px" }}>
-            <Head>
-              <title>{pageInfo.title}</title>
-            </Head>
-            <Grid
-              container
-              rowSpacing={5}
-              columnSpacing={3}
-              sx={{
-                justifyContent: "flex-start",
-              }}
-            >
-              {data?.data?.pageItems?.map((item) => {
-                return (
-                  <Grid item xs={12} md={3} key={item?.employeeId}>
-                    <TeamCard data={item} theme={theme} />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Container>
-        </Box>
-      </div>
+      <MainCover
+        breadcrumbs={pageInfo.breadcrumbs}
+        title={pageInfo.title}
+        description={pageInfo.description}
+        image={pageInfo.image}
+        headerType={headerType}
+      />
+      <Box className={classes.root}>
+        <Head>
+          <title>{pageInfo.title}</title>
+          <meta
+            name="keywords"
+            content={getSEOKeywordsContent(data?.data?.pageDetail?.seoTags)}
+          />
+          <meta
+            name="description"
+            content={data?.data?.pageDetail?.seoDescription}
+          />
+        </Head>
+        <Container maxWidth="false" className={classes.innerContainer}>
+          <Grid container rowSpacing={5} columnSpacing={3}>
+            {data?.data?.pageItems?.map((item) => {
+              return (
+                <Grid item xs={12} md={3} key={item.employeeId}>
+                  <TeamCard employee={item} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
+      </Box>
     </div>
   );
-}
+};
+export default Team;
 export async function getStaticProps({ locale }) {
-  const [getFetch] = useFetch();
   let data = null;
   try {
     const res = await getFetch(

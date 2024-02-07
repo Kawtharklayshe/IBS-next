@@ -1,17 +1,21 @@
-import { useState, useEffect } from "react";
-import { Grid, Typography, Container, Divider, Box } from "@mui/material";
-import MainCover from "../components/mainCover";
-import { checkLoadImages } from "../utilies/utiliesFuctions";
-import GalleryImage from "../components/galleryItem";
-import { GET_GALLERY } from "../services/endpoints";
-import useFetch from "../components/useFetch/useFetch";
-import useTranslation from "next-translate/useTranslation";
 import Head from "next/head";
-import FullImage from "../components/helpers/fullImage";
-import CustomLoader from "../components/customLoader";
+import { useState, useEffect } from "react";
+import useTranslation from "next-translate/useTranslation";
+import {
+  checkLoadImages,
+  getSEOKeywordsContent,
+} from "../utilies/utiliesFuctions";
+import { getFetch } from "../services/httpService";
+import { GET_GALLERY } from "../services/endpoints";
+import { Grid, Container, Box } from "@mui/material";
+import MainCover from "../components/Shared/pageCover/mainCover/Type2";
+import CustomLoader from "../components/Shared/customLoader";
+import GalleryImage from "../components/pages/Gallery/GalleryItem";
+import useStyles from "../components/pages/Gallery/style";
 
-const gallery = ({ data, headerType }) => {
+const gallery = ({ data, headerType, theme }) => {
   let { t } = useTranslation("common");
+  const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [pageInfo, setPageInfo] = useState({
     title: data?.data?.pageDetail?.title,
@@ -19,7 +23,7 @@ const gallery = ({ data, headerType }) => {
     description: "",
     breadcrumbs: [
       {
-        title: "home",
+        title: t("home"),
         link: "/",
       },
       {
@@ -40,32 +44,27 @@ const gallery = ({ data, headerType }) => {
   const [galleryImages, setGalleryImages] = useState(
     handlegalleryImages(data?.data?.pageItems)
   );
+
   useEffect(() => {
     checkLoadImages(setLoading);
   }, []);
 
   return (
     <div>
-      <div
-        style={{
-          width: "100%",
-          height: "100vh",
-          background: "#fcfcfc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: "1000",
-        }}
-        className={!loading ? "none" : undefined}
-      >
+      <div className={!loading ? "none" : undefined}>
         <CustomLoader />
       </div>
       <div className={loading ? "hidden" : undefined}>
         <Head>
           <title>{pageInfo.title}</title>
+          <meta
+            name="keywords"
+            content={getSEOKeywordsContent(data?.data?.pageDetail?.seoTags)}
+          />
+          <meta
+            name="description"
+            content={data?.data?.pageDetail?.seoDescription}
+          />
         </Head>
         <MainCover
           breadcrumbs={pageInfo.breadcrumbs}
@@ -74,28 +73,31 @@ const gallery = ({ data, headerType }) => {
           image={pageInfo.image}
           headerType={headerType}
         />
-        <Box sx={{ backgroundColor: "background.main" }}>
-          <Container maxWidth="lg" sx={{ paddingBottom: "100px" }}>
-            <Grid container rowSpacing={5} columnSpacing={3} mt={"-40px"}>
-              {galleryImages.map((arrItem, index) => {
-                if (index % 2 === 0)
-                  return arrItem.map((galleryItem, ind) => (
-                    <Grid
-                      item
-                      xs={ind + 1 == arrItem.length ? 12 : 6}
-                      md={4}
-                      key={ind}
-                    >
-                      <GalleryImage
-                        item={galleryItem}
-                        images={data?.data?.pageItems}
-                      />
-                    </Grid>
-                  ));
-                else
-                  return arrItem.map((galleryItem, ind) => {
-                    if (ind % 2 === 0)
-                      return (
+        <Box className={classes.root}>
+          <Container maxWidth="false" className={classes.innerContainer}>
+            <Grid
+              container
+              rowSpacing={5}
+              columnSpacing={3}
+              className={classes.imagesGrid}
+            >
+              {galleryImages.map((arrItem, index) =>
+                index % 2 === 0
+                  ? arrItem.map((galleryItem, ind) => (
+                      <Grid
+                        item
+                        xs={ind + 1 == arrItem.length ? 12 : 6}
+                        md={4}
+                        key={ind}
+                      >
+                        <GalleryImage
+                          item={galleryItem}
+                          images={data?.data?.pageItems}
+                        />
+                      </Grid>
+                    ))
+                  : arrItem.map((galleryItem, ind) =>
+                      ind % 2 === 0 ? (
                         <Grid
                           item
                           xs={ind + 1 == arrItem.length ? 12 : 6}
@@ -107,9 +109,7 @@ const gallery = ({ data, headerType }) => {
                             images={data?.data?.pageItems}
                           />
                         </Grid>
-                      );
-                    else
-                      return (
+                      ) : (
                         <Grid
                           item
                           xs={ind + 1 == arrItem.length ? 12 : 6}
@@ -121,9 +121,9 @@ const gallery = ({ data, headerType }) => {
                             images={data?.data?.pageItems}
                           />
                         </Grid>
-                      );
-                  });
-              })}
+                      )
+                    )
+              )}
             </Grid>
           </Container>
         </Box>
@@ -134,9 +134,6 @@ const gallery = ({ data, headerType }) => {
 
 export default gallery;
 export async function getStaticProps({ locale }) {
-  const [getFetch] = useFetch();
-  // const data = null;
-
   const res = await getFetch(
     GET_GALLERY,
     process.env.NEXT_PUBLIC_MERCHANT,
