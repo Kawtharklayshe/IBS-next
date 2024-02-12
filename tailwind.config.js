@@ -8,6 +8,16 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    container: {
+      center: true,
+      padding: {
+          DEFAULT: '12px',
+          sm: '1rem',
+          lg: '45px',
+          xl: '1rem',
+          '2xl': '1rem',
+      },
+  },
   },
   plugins: [],
 };

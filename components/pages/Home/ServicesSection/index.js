@@ -26,6 +26,7 @@ const ServicesSection = ({ data }) => {
         <Typography variant="subtitle1" className={classes.subTitle}>
           {data.detail.subTitle}
         </Typography>
+
         <Swiper
           {...Params}
           dir={Router.locale == "ar" ? "rtl" : "ltr"}
@@ -40,6 +41,7 @@ const ServicesSection = ({ data }) => {
               >
                 <ServiceCard item={service} />
               </SwiperSlide>
+              
             );
           })}
         </Swiper>

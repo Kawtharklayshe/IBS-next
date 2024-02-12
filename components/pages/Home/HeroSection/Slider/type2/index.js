@@ -42,7 +42,8 @@ const ThumbnailPlugin = (mainRef) => {
   }
 }
 
-const SwiperThumbnails = ({ direction='rtl' }) => {
+const SwiperThumbnails = ({ direction='rtl',sliderItem }) => {
+  console.log('sliderItem',sliderItem)
   // ** Hooks
   const theme = useTheme()
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -71,40 +72,23 @@ const SwiperThumbnails = ({ direction='rtl' }) => {
   return (
     <>
     <KeenSliderWrapper>  
+      
       <Box ref={sliderRef} className='keen-slider'>
-        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_948ddfe1-af95-493a-b5e6-4735720bb5e6637963279476172709.jpg' alt='swiper 1' />
-        </Box>
-        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_2c065470-3692-4a36-8d45-38bfb9022ea1637995548705326495.jpg' alt='swiper 2' />
-        </Box>
-        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_fa8a07b9-14bb-4983-9c07-1da89d6ff656637995548506805539.jpg' alt='swiper 3' />
-        </Box>
-        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_7a2fcae0-a229-4f51-b0e3-d5ca146d0e53637995548301819628.jpg' alt='swiper 4' />
-        </Box>
-        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_948ddfe1-af95-493a-b5e6-4735720bb5e6637963279476172709.jpg' alt='swiper 5' />
-        </Box>
-      </Box>
+  {sliderItem.map((item, index) => (
+    <Box key={index} sx={{ display: 'flex' }} className='keen-slider__slide'>
+      <img src={item.images} alt={item.alt} />
+    </Box>
+  ))}
+</Box>
+
 
       <Box sx={{ mt: 4 }} ref={thumbnailRef} className='keen-slider thumbnail'>
-        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_948ddfe1-af95-493a-b5e6-4735720bb5e6637963279476172709.jpg' alt='swiper 1' />
-        </Box>
-        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_2c065470-3692-4a36-8d45-38bfb9022ea1637995548705326495.jpg' alt='swiper 2' />
-        </Box>
-        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_fa8a07b9-14bb-4983-9c07-1da89d6ff656637995548506805539.jpg' alt='swiper 3' />
-        </Box>
-        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_7a2fcae0-a229-4f51-b0e3-d5ca146d0e53637995548301819628.jpg' alt='swiper 4' />
-        </Box>
-        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
-          <img src='https://foliocontent.meta-itech.com/Content/Uploads//coastal//File_948ddfe1-af95-493a-b5e6-4735720bb5e6637963279476172709.jpg' alt='swiper 5' />
-        </Box>
+       
+        {sliderItem.map((item, index) => (
+    <Box key={index} className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
+      <img src={item.images} alt={item.alt} />
+    </Box>
+  ))}
       </Box>
       </KeenSliderWrapper>
     </>

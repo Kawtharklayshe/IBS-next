@@ -94,7 +94,7 @@ const Slider = ({ data = [], headerType, heroHeight }) => {
           </SwiperSlide>
         ))}
       </Swiper> */}
-      <ThumbnailPlugin />
+      <ThumbnailPlugin sliderItem={data}/>
     </Box>
   );
 };

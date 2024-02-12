@@ -48,7 +48,7 @@ export default function Shop({ headerType, filters, data, theme }) {
   const [pageInfo, setPageInfo] = useState({
     title: data?.data?.pageDetail?.title || "",
     image: data?.data?.pageDetail?.image,
-    description: data?.data?.pageDetail.description,
+    description: data?.data?.pageDetail?.description,
     breadcrumbs: [
       {
         title: t("home"),
@@ -200,7 +200,7 @@ export default function Shop({ headerType, filters, data, theme }) {
       setPageInfo({
         title: data?.data?.pageDetail?.title || "",
         image: data?.data?.pageDetail?.image,
-        description: data?.data?.pageDetail.description,
+        description: data?.data?.pageDetail?.description,
         breadcrumbs: [
           {
             title: t("home"),

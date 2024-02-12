@@ -61,6 +61,7 @@ export default function Home(props) {
   }, []);
 
   return (
+  
     <Box className={classes.root}>
       <Head>
         <title>{t("home")}</title>
@@ -70,6 +71,7 @@ export default function Home(props) {
         />
         <meta name="description" content={data?.data?.seo?.seoDescription} />
       </Head>
+     
       <HeroSection
         mainHeaderType={mainHeaderType}
         headerType={headerType}
@@ -78,15 +80,16 @@ export default function Home(props) {
         devicesCategory={devicesCategory}
         featureSectionData={data?.data?.sectionsContent?.feature}
       />
+        <div class="container relative">
       {data?.data?.webLayout?.sections.map((section, index) => {
         return (
           <Box key={index}>
             {section.name == "services" && (
               <ServicesSection data={data?.data?.sectionsContent?.services} />
             )}
-            {section.name == "introSection" && (
+            {/* {section.name == "introSection" && (
               <IntroSection data={data?.data?.sectionsContent?.introSection} />
-            )}
+            )} */}
             {section.name == "testimonial" && (
               <TestimonialsSection
                 data={data?.data?.sectionsContent?.testimonial}
@@ -134,12 +137,15 @@ export default function Home(props) {
           </Box>
         );
       })}
+        </div>
       <PopUpNotificationModal
         open={open}
         handleClose={handleClose}
         data={notifications?.popup}
       />
+     
     </Box>
+  
   );
 }
 export async function getStaticProps({ locale }) {

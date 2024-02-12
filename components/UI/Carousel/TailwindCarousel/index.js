@@ -50,6 +50,48 @@ const AdvanceCarousel = ({ items = [], parentTitle = "" }) => {
   };
   return (
     <Box className={classes.root}>
+      <div class="container relative">
+          <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+            <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
+              <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">Explore Latest Works</h3>
+              <p class="text-slate-400 max-w-xl">Start working with Techwind that can provide everything you need to generate awareness, drive traffic, connect.</p>
+            </div>
+
+            <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
+              <a href="" class="btn btn-link text-indigo-600 hover:text-indigo-600 after:bg-indigo-600 duration-500 ease-in-out">See More <i class="uil uil-arrow-right align-middle"></i></a>
+            </div>
+          </div>
+
+          <div class="sm:flex mt-4">
+            {items.map((item, index) => (
+              <div class="sm:w-1/2 picture-item p-4 rounded-md">
+                <div class="">
+                  <div class="relative">
+                    <div class="shadow dark:shadow-gray-800 p-5 pb-0 rounded-md bg-indigo-600/5 dark:bg-indigo-600/30">
+                      {item?.mediaItems?.map((img, index) => {
+                        return (
+                          <img
+                            key={index}
+                            src={img.thumbnailUrl}
+
+                            class="rounded-t-md shadow"
+                          />
+                        );
+                      })}
+
+                    </div>
+                  </div>
+
+                  <div class="pt-4 px-3">
+                    <h5 class="mb-1 font-semibold text-xl"><a href="https://1.envato.market/techwind" target="_blank" class="hover:text-indigo-600 transition-all duration-500 ease-in-out">{item.title}</a></h5>
+                    <span class="text-slate-400"> {convertToPlain(item?.description)}</span>
+                  </div>
+                </div>
+              </div>
+
+            ))}
+          </div>
+        </div>
       <Swiper
         {...Params}
         ref={advancedSwiperRef}
@@ -65,67 +107,43 @@ const AdvanceCarousel = ({ items = [], parentTitle = "" }) => {
             onClick={() => goNext(advancedSwiperRef)}
             className={classes.PrevArrow}
           />
+          
         </Box> */}
+
+        
+
+
         {items.map((item, index) => (
           <SwiperSlide dir={Router.locale == "ar" ? "RTL" : "LTR"} key={index}>
             {({ isActive }) => (
               <Box className={classes.ContainerForAllSections}>
-                  <section class="relative md:py-24 py-16 ">
-            <div class="container relative">
-                <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
-                    <div class="lg:col-span-8 md:col-span-6">
-                        <div class="p-6 rounded-md shadow dark:shadow-gray-800">
+                <div class="w-100 picture-item p-4 rounded-md">
+                  <div class="w-100">
+                    <div class="container">
+                      <div class="shadow dark:shadow-gray-800 text-center p-5 pb-0 rounded-md bg-indigo-600/5 dark:bg-indigo-600/30">
                         {item?.mediaItems?.map((img, index) => {
-                    return (
-                      <img
-                        key={index}
-                        src={img.thumbnailUrl}
-                        class="rounded-md"
-                      />
-                    );
-                  })}
-                          
+                          return (
+                            <img
+                              key={index}
+                              src={img.thumbnailUrl}
 
-                         
-                        </div>
+                              class="rounded-t-md shadow "
+                            />
+                          );
+                        })}
 
-                    
-
-                      
+                      </div>
                     </div>
 
-                 
+                    <div class="mt-10 px-3" className={`${classes.containerForTextSection} ${isActive && classes.textSectionAnimation // for applying animation when Text is going to be shown
+                      }`}>
+                      <h5  class="mb-1  font-semibold text-xl"><a href="https://1.envato.market/techwind" target="_blank" class="hover:text-indigo-600 transition-all duration-500 ease-in-out">{item.title}</a></h5>
+                      <span class="text-slate-400"> {convertToPlain(item?.description)}</span>
+                    </div>
+                  </div>
                 </div>
-            </div>
 
-        </section>
-                <Box
-                  className={`${classes.containerForTextSection} ${
-                    isActive && classes.textSectionAnimation // for applying animation when Text is going to be shown
-                  }`}
-                >
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={classes.titleTextSection}
-                  >
-                    {item?.title}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    className={classes.descriptionTextSection}
-                  >
-                    {convertToPlain(item?.description)}
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    className={classes.btnTextSection}
-                    onClick={() => handleClick(item.slug)}
-                  >
-                    {t("Read More")}
-                  </Button>
-                </Box>
-              
+
               </Box>
             )}
           </SwiperSlide>

@@ -66,6 +66,7 @@ async function fetchTheme(language, detectedCurrency) {
 }
 
 function MyApp({ Component, pageProps }) {
+  console.log(pageProps)
   const Router = useRouter();
   const dispatch = useDispatch();
   const [loadingData, setLoadingData] = useState(false);

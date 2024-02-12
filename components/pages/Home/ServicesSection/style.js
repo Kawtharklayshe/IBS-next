@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${props.backgroundImage})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    marginTop:'1rem'
   }),
   // Inner Container class
   innerContainer: {
