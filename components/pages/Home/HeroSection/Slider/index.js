@@ -37,7 +37,7 @@ const Slider = ({ data = [], headerType, heroHeight }) => {
 
   return (
     <Box className={classes.root}>
-      {/* <Swiper
+      <Swiper
         {...Params}
         ref={swiperbackRef}
         onSlideChange={
@@ -93,8 +93,8 @@ const Slider = ({ data = [], headerType, heroHeight }) => {
             </Container>
           </SwiperSlide>
         ))}
-      </Swiper> */}
-      <ThumbnailPlugin sliderItem={data}/>
+      </Swiper> 
+      
     </Box>
   );
 };

@@ -2,6 +2,7 @@ import { Container, Button, Box, Typography } from "@mui/material";
 import useStyles from "./style";
 
 const CommunicateUsSection = ({ data }) => {
+  console.log('data',data)
   const classes = useStyles({ backgroundImage: data?.items?.image });
   return (
     <Box
@@ -13,6 +14,7 @@ const CommunicateUsSection = ({ data }) => {
     >
       <Box className={classes.overlay} />
       <Container maxWidth="false" className={classes.innerContainer}>
+    
         <Typography variant="body1" component="p" className={classes.title}>
           {data?.items?.title}
         </Typography>
@@ -20,7 +22,7 @@ const CommunicateUsSection = ({ data }) => {
           className={classes.button}
           onClick={() => window.open(data?.items?.buttonUrl, "_blank")}
         >
-          {data?.items?.buttonText}
+          {data?.items?.buttonText}s
         </Button>
       </Container>
     </Box>

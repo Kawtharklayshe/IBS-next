@@ -8,6 +8,7 @@ import useStyles from "./style";
 const MobileMenuBuilder = ({ theme, navList, toggle, categories }) => {
   const classes = useStyles();
 
+
   const renderNavMenu = navList.map((navItem, index) =>
     navItem.children.length == 0 ? (
       <Fragment key={index}>

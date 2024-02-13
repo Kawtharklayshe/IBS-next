@@ -17,7 +17,7 @@ import {
 import isHomePg from "../../../../../utilies/detectHomePage/isHomePg";
 import MenuBuilder from "../../MenuBuilder";
 import CategoriesSection from "./CategoriesSection";
-import AutocompleteSearchField from "../../../../UI/AutoSearchTextField/Type1";
+// import AutocompleteSearchField from "../../../../UI/AutoSearchTextField/Type1";
 import {
   Search,
   KeyboardArrowDown,
@@ -216,14 +216,14 @@ const WebHeader = (props) => {
                     )}
                     {/** end of Nav items */}
                     {/** Search Input section */}
-                    {show && (
+                    {/* {show && (
                       <AutocompleteSearchField
                         onClickSearchButton={handleNavigateToShopPage}
                         onSelecting={handleSelectOption}
                         onClose={toggle}
                         applyAnimation
                       />
-                    )}
+                    )} */}
                     {/** end of Search input section */}
                   </Grid>
                   {/** Cart and language section */}
@@ -439,11 +439,11 @@ const WebHeader = (props) => {
         </Container>
         {/** End of First Row section */}
         {/** Second Row section */}
-        <CategoriesSection
+        {/* <CategoriesSection
           categories={categories}
           isReadyToAnimate={isReadyToAnimate}
           animationDelay={calcDelay(0.48)}
-        />
+        /> */}
         {/** end of Second Row section */}
       </Box>
     </Box>

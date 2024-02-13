@@ -31,6 +31,17 @@ export const LOGIN = `${baseURL}/web/Account/Login`;
 export const RESENDCODE = `${baseURL}/web/Account/ResendCode`;
 export const CHECKFORGETCODE = `${baseURL}/Web/Account/CheckCode`;
 export const POSTNEWPASSWORD = `${baseURL}/Web/Account/ConfirmForgetPassword`;
+export const GETPUBLICATIONSLIST = (pageCount, pageSize) =>
+  `${baseURL}/web/Publication?PageNumber=${pageCount}&PageSize=${pageSize}`;
+export const GET_PUBLICATION_DETAILS = (publicationSlug) =>
+  `${baseURL}/web/Publication/${publicationSlug}`;
+export const GET_EVENTS_PAGE = (slug) => `${baseURL}/web/EventType/${slug}`;
+export const GET_EVENT_DETAILS_PAGE = (slug) => `${baseURL}/web/Event/${slug}`;
+export const GET_EVENT_ACTION_DETAILS_PAGE = (eventActionSlug) =>
+  `${baseURL}/web/EventAction/${eventActionSlug}`;
+export const GET_EVENT = (pageCount, pageSize) =>
+  `${baseURL}/web/EventType?PageNumber=${pageCount}&PageSize=${pageSize}`;
+export const POST_EVENT_ACTION_BOOKING = `${baseURL}/web/EventAction`;
 ////////////////////////////////////////////////////////////////////////////////////////
 
 ///// Ecommerce Endpoints
@@ -105,3 +116,10 @@ export const Get_Current_User_Connection_Info = "https://ip.nf/me.json";
 export const AddGuestUserUrl = `${process.env.NEXT_PUBLIC_CHAT_SERVER_PATH}/api/V1/Public/Account/AddGuestUser`;
 export const roomMessagesUrl = `${process.env.NEXT_PUBLIC_CHAT_SERVER_PATH}/api/V1/Public/ChatSupport/GetRoomMessages`;
 export const roomUnreadMessagesUrl = `${process.env.NEXT_PUBLIC_CHAT_SERVER_PATH}/api/V1/Public/ChatSupport/GetRoomUnreadMessagesCount`;
+
+
+// Twitter endpoints
+
+// serach tweets base on hashtag
+export const GetSearchedHashtagTweets = (queryString) =>
+  `https://api.twitter.com/2/tweets/search/recent?query=${queryString}`;

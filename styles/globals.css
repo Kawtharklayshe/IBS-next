@@ -30,6 +30,10 @@
   font-weight: 400;
   font-style: normal;
 } */
+
+.swiper.swiper-initialized.swiper-horizontal.swiper-pointer-events.jss128.swiper-backface-hidden {
+  height: 700px;
+}
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

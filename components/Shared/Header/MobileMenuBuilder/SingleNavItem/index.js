@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import useStyles from "./style";
 
 const SingleNavItem = ({ navItem, toggle }) => {
+  
   // navItem properties : {name, title, subTitle, link, children}
   const { title, link } = navItem;
   const classes = useStyles();

@@ -29,7 +29,7 @@ import {
 } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import CartIcon from "../../../../../assets/SVG/CartIcon2";
-import AutocompleteSearchField from "../../../../UI/AutoSearchTextField/Type1";
+// import AutocompleteSearchField from "../../../../UI/AutoSearchTextField/Type1";
 import ContactsList from "./ContactsList";
 import SocialMediaList from "./SocialMediaList";
 import usePartialAnimiStyles from "../../CustomAnimation/partialAnimation";
@@ -306,10 +306,10 @@ const MobileHeader = (props) => {
                 animationDelay: calcDelay(1.9, socialMediaLinks.length),
               }}
             >
-              <AutocompleteSearchField
+              {/* <AutocompleteSearchField
                 onClickSearchButton={handleNavigateToShopPage}
                 onSelecting={handleSelectOption}
-              />
+              /> */}
             </Grid>
           </Grid>
         </Box>

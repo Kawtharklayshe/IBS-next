@@ -42,6 +42,7 @@ import { themeGenerator } from "../utilies/theme/themeGenerator";
 const [getTheme] = useTheme();
 async function fetchTheme(language, detectedCurrency) {
   let theme = await getTheme(language, detectedCurrency);
+ 
   return {
     pages: theme?.data?.navbarItems,
     themeData: theme?.data?.theme,

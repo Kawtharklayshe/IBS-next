@@ -6,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import { Grid, Typography, Divider, Box } from "@mui/material";
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
-import AutocompleteSearchField from "../../../../UI/AutoSearchTextField/Type1";
+// import AutocompleteSearchField from "../../../../UI/AutoSearchTextField/Type1";
 import MobileMenuBuilder from "../../MobileMenuBuilder";
 import Canvas from "../../Canvas";
 import SocialMediaList from "./SocialMediaList";
@@ -54,11 +54,11 @@ const MobileSideMenu = ({
           />
         )}
         <Box className={classes.searchInputContainer}>
-          <AutocompleteSearchField
+          {/* <AutocompleteSearchField
             onClickSearchButton={handleNavigateToShopPage}
             onSelecting={handleSelectOption}
             applyAnimation
-          />
+          /> */}
         </Box>
       </Grid>
       {/** end of header section */}
@@ -71,7 +71,7 @@ const MobileSideMenu = ({
       />
       {/** end of content section */}
       {/** Account section */}
-      <Grid item xs={12} className={classes.accountSectionContainer}>
+      {/* <Grid item xs={12} className={classes.accountSectionContainer}>
         <Typography
           variant="h6"
           component="h2"
@@ -79,11 +79,11 @@ const MobileSideMenu = ({
         >
           {t("My Account")}
         </Typography>
-      </Grid>
-      <Divider />
+      </Grid> */}
+      {/* <Divider /> */}
       {/** end of Account section */}
       {/** Login section */}
-      {!userInfo?.isLogged && (
+      {/* {!userInfo?.isLogged && (
         <Grid item xs={12} className={classes.loginSectionContainer}>
           <Typography
             variant="subtitle1"
@@ -111,7 +111,7 @@ const MobileSideMenu = ({
             {t("Register")}
           </Typography>
         </Grid>
-      )}
+      )} */}
       {/** end of Login section */}
       {/** Social media section */}
       <Grid item xs={12} className={classes.socialMediaContainer}>

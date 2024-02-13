@@ -30,6 +30,7 @@ export default function Home(props) {
     notifications,
     devicesCategory,
   } = props;
+  
   const classes = useStyles();
   const [heroHeight, setHeroHeight] = useState(0);
   const [open, setOpen] = useState(false);

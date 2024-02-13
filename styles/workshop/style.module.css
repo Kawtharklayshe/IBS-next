@@ -1,0 +1,193 @@
+@media (min-width: 900px) {
+  .boxWorkShopAll {
+    padding-right: 50px;
+    padding-left: 120px;
+  }
+}
+
+.descWorkShop {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+  color: #4f4f4f;
+}
+.headWorkShop {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  /* color: #3d3a3a; */
+  /* margin-bottom: 20px; */
+  margin: auto;
+}
+.boxWorkShop {
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #f8f8f8;
+  border: 1px solid #dadada;
+}
+.h6CardWorkShop {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 35px;
+  color: #3d3a3a;
+  /* padding-bottom: 10px; */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pCardWorkShop {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25px;
+  color: #787878;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.partner {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eventDateTitle {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 50%;
+  position: absolute;
+  bottom: -15px;
+  transform: translateX(50%);
+  text-align: center;
+}
+@media (max-width: 400px) {
+  .cardInAccordion {
+    width: fit-content !important;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 900px) {
+  .descWorkShop {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+.h6Accordion {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+}
+.detailWorkShopSlug {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 30px;
+  color: #171717;
+}
+.pSlug {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #171717;
+}
+.spanSlug {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 60px;
+  color: #9b9b9b;
+}
+.boxSlug {
+  background: #fcfcfc;
+  /* width: 354px; */
+  height: fit-content;
+}
+/* .btnSlug{
+width: 169px;
+height: 57px;
+margin-top: 30px;
+border: none;
+cursor: pointer;
+} */
+
+.boxButton {
+  padding-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.cardTwo {
+  background: #fcfcfc;
+  width: 354px;
+  height: 432px;
+  position: relative;
+  margin-top: 30px;
+}
+.h6CardTwo {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #3d3a3a;
+}
+.dateCardTwo {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #b4b0b0;
+  padding-left: 50px;
+}
+.pCardTwo {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  display: block;
+  color: #171717;
+}
+.boxLearnMore {
+  width: 354px;
+  height: 39px;
+  background: #efefef;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  padding-top: 10px;
+}
+@media (max-width: 767px) {
+  .parentSlug {
+    flex-wrap: wrap;
+  }
+  .detailWorkShopSlug {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .boxAccordion {
+    width: 100%;
+  }
+  .boxSlug {
+    width: 100%;
+    text-align: center;
+    height: unset;
+  }
+  .boxButton {
+    justify-content: space-around !important;
+  }
+}
